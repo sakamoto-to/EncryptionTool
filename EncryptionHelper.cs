@@ -6,15 +6,18 @@ namespace EncryptionTool
 {
     public class EncryptionHelper
     {
-        /// <summary>秘密鍵（AES用）</summary>
+        /// <summary>秘密鍵（AES用）
+        /// 注意: 本番環境では、鍵をソースコードにハードコードしないでください。
+        /// 安全な鍵管理システムまたは設定ファイルから取得してください。
+        /// </summary>
         private string KEY = "testTobeAesKey01";
         /// <summary>初期化ベクトル（AES用）</summary>
         private string VEC = "testTobeAesIv001";
-        /// <summary>秘密鍵（DES用）</summary>
+        /// <summary>秘密鍵（DES用）- DESは安全性が低いため、重要なデータには使用しないでください</summary>
         private string DES_KEY = "testDes1";
         /// <summary>初期化ベクトル（DES用）</summary>
         private string DES_VEC = "testDes1";
-        /// <summary>秘密鍵（TripleDES用）</summary>
+        /// <summary>秘密鍵（TripleDES用）- 新規開発ではAESの使用を推奨</summary>
         private string TRIPLE_DES_KEY = "testTobeTripleDes0123456";
         /// <summary>初期化ベクトル（TripleDES用）</summary>
         private string TRIPLE_DES_VEC = "testDes1";
@@ -143,6 +146,7 @@ namespace EncryptionTool
 
         /// <summary>
         /// DES暗号化し文字列を返す
+        /// 注意: DESは古い暗号化方式で、現代の基準では安全性が低いです。重要なデータには使用しないでください。
         /// </summary>
         /// <param name="str">暗号化対象文字列</param>
         /// <returns>暗号化済文字列</returns>
@@ -170,7 +174,7 @@ namespace EncryptionTool
             }
             catch (Exception)
             {
-                return str;
+                throw;
             }
         }
 
@@ -209,6 +213,7 @@ namespace EncryptionTool
 
         /// <summary>
         /// TripleDES暗号化し文字列を返す
+        /// 注意: TripleDESは古い暗号化方式です。新規開発ではAESの使用を推奨します。
         /// </summary>
         /// <param name="str">暗号化対象文字列</param>
         /// <returns>暗号化済文字列</returns>
@@ -236,7 +241,7 @@ namespace EncryptionTool
             }
             catch (Exception)
             {
-                return str;
+                throw;
             }
         }
 
@@ -275,6 +280,8 @@ namespace EncryptionTool
 
         /// <summary>
         /// MD5ハッシュ生成
+        /// 注意: MD5は暗号学的に安全ではなく、セキュリティ用途には使用しないでください。
+        /// チェックサムや非セキュリティ用途にのみ使用してください。
         /// </summary>
         /// <param name="str">ハッシュ化対象文字列</param>
         /// <returns>ハッシュ文字列</returns>
